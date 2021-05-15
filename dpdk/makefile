@@ -7,7 +7,7 @@ PKGCONF?=pkg-config
 ifdef OS
 CC_FLAGS=
 else
-CC_FLAGS=-fpic
+CC_FLAGS=-fpic -DALLOW_EXPERIMENTAL_API -Wall
 endif
 CC_EXTRA?= -O3 $(shell $(PKGCONF) --cflags libdpdk)
 CTAGS_I_PATH?=./

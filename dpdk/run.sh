@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-sudo ./main --in-memory
+make && sudo ./main --in-memory --trace=.* "$@"
