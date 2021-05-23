@@ -1,8 +1,8 @@
 TARGET?=main
 SHELL=bash
 SHELL?=bash
-CC=clang
-CC?=clang
+CC=gcc
+CC?=gcc
 PKGCONF?=pkg-config
 ifdef OS
 CC_FLAGS=

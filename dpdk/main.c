@@ -1,4 +1,6 @@
 
+#include "misc.h"
+
 #include <errno.h>
 #include <inttypes.h>
 #include <stdbool.h>
@@ -21,22 +23,22 @@ RTE_TRACE_POINT_REGISTER(app_trace_string, app.trace.string)
 
 void get_simd_bitwidth(void) {
   uint16_t max_simd_bitwidth = rte_vect_get_max_simd_bitwidth();
-  printf("max_simd_bitwidth: %d\n", max_simd_bitwidth);
+  PRINT_WITH_COLOR_LB(BLUE, "max_simd_bitwidth: %d\n", max_simd_bitwidth);
   switch (max_simd_bitwidth) {
   case RTE_VECT_SIMD_DISABLED:
-    printf("simd is disabled\n");
+    PRINT_WITH_COLOR_LB(RED, "simd is disabled");
     break;
   case RTE_VECT_SIMD_128:
-    printf("simd is 128\n");
+    PRINT_WITH_COLOR_LB(BLUE, "simd is 128");
     break;
   case RTE_VECT_SIMD_256:
-    printf("simd is 256\n");
+    PRINT_WITH_COLOR_LB(BLUE, "simd is 256");
     break;
   case RTE_VECT_SIMD_512:
-    printf("simd is 512\n");
+    PRINT_WITH_COLOR_LB(BLUE, "simd is 512");
     break;
   default:
-    printf("dunno what's going on\n");
+    PRINT_WITH_COLOR_LB(YELLOW, "we shouldn't be here");
   }
 }
 
@@ -48,7 +50,7 @@ void create_ring_buffers(const char* ring_buffer_name, unsigned int ring_buffer_
   if (NULL == ring) {
     rte_panic("could not create ring.\n");
   } else {
-    printf("ring created successfully.\n");
+    PRINT_WITH_COLOR_LB(GREEN, "ring created successfully");
   }
 
 }
@@ -63,11 +65,9 @@ int main(int argc, char **argv) {
   }
 
   rte_trace_mode_set(RTE_TRACE_MODE_OVERWRITE);
-
-  create_ring_buffers("ring_one",1024);
-
   get_simd_bitwidth();
-
+  create_ring_buffers("ring_one",1024);
   rte_eal_cleanup();
+
   return 0;
 }
