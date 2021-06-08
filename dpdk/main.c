@@ -67,6 +67,7 @@ int main(int argc, char **argv) {
   rte_trace_mode_set(RTE_TRACE_MODE_OVERWRITE);
   get_simd_bitwidth();
   create_ring_buffers("ring_one",1024);
+  rte_eal_mp_wait_lcore();
   rte_eal_cleanup();
 
   return 0;
